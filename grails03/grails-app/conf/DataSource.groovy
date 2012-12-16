@@ -36,10 +36,10 @@ environments {
     }
     production {
         dataSource {
-            dbCreate = "validate"
+//            dbCreate = "validate"
+//            dbCreate = "update"
             url = "jdbc:postgresql://localhost:5432/grails03"
             pooled = true
-//            dbCreate = "update"
 //            url = "jdbc:h2:prodDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
 //            pooled = true
 //            properties {
