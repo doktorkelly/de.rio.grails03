@@ -130,6 +130,7 @@
 					<li class="controller"><g:link controller="student">Students</g:link></li>
 					<li class="controller"><g:link controller="registration">Registrations</g:link></li>
 					<li class="controller"><g:link controller="lesson">Lessons</g:link></li>
+					<li class="controller"><g:link controller="room">Rooms</g:link></li>
 					<hr/>
 					<li class="controller"><g:link controller="user">users</g:link></li>
 					<li class="controller"><g:link controller="role">roles</g:link></li>

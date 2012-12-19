@@ -10,12 +10,13 @@
 	<ul>
 		<li><a class="home" href="${createLink(uri: '/')}">Home</a></li>
 		<li><g:link class="login" controller="login">Login</g:link></li>
-		<li><g:link class="logout" controller="logout ">Logout </g:link></li>
+		<li><g:link class="logout" controller="logout ">Logout</g:link></li>
 		<li><g:link class="list" controller="course">Courses</g:link></li>
 		<li><g:link class="list" controller="teacher">Teachers</g:link></li>
 		<li><g:link class="list" controller="student">Students</g:link></li>
 		<li><g:link class="list" controller="registration">Registrations</g:link></li>
 		<li><g:link class="list" controller="lesson">Lessons</g:link></li>
+		<li><g:link class="list" controller="room">Rooms</g:link></li>
 	</ul>
 </div>
 

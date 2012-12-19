@@ -14,6 +14,6 @@ class Registration {
     }
 	
 	String toString() {
-		return "${course} | ${student.lastName}, ${student.firstName}";
+		return "${course.name} | ${student.lastName}, ${student.firstName}";
 	}
 }

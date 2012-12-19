@@ -2,13 +2,12 @@ package de.rio
 
 class Course {
 	String name;
-	String room;
 	Date   startDate;
 	Date   endDate;
 	BigDecimal price;
 	String scheduleText;
-	// String teacher;
-	
+
+	Room    room;
 	Teacher teacher;
 	
 	static hasMany = [registrations: Registration, lessons: Lesson];
@@ -21,10 +20,9 @@ class Course {
 		teacher(nullable:true)
 		startDate(nullable:true)
 		endDate(nullable:true)
-		// teacher(nullable:true)
     }
 	
 	String toString() {
-		return "${name}";
+		return "${name} | ${scheduleText}";
 	}
 }
