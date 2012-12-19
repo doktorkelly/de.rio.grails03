@@ -2,6 +2,8 @@ package de.rio
 
 class Course {
 	String name;
+	String group;
+	String quartal;
 	Date   startDate;
 	Date   endDate;
 	BigDecimal price;
@@ -14,6 +16,8 @@ class Course {
 	
     static constraints = {
 		name(blank:false)
+		group(nullable:true)
+		quartal(nullable:true)
 		price(nullable:true)
 		room(nullable:true)
 		scheduleText(nullable:true)
@@ -22,7 +26,12 @@ class Course {
 		endDate(nullable:true)
     }
 	
-	String toString() {
-		return "${name} | ${scheduleText}";
+	static mapping = {
+		group column: 'group_name'
 	}
+	
+	String toString() {
+		return "${name} | ${group} | ${quartal} | ${scheduleText}";
+	}
+	
 }
