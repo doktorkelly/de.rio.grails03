@@ -28,6 +28,6 @@ class Student {
     }
 	
 	String toString() {
-		return "${lastName}, ${firstName} (${id})";
+		return "${lastName}, ${firstName}";
 	}
 }

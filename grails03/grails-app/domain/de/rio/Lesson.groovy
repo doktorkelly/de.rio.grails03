@@ -20,4 +20,9 @@ class Lesson {
 		homework(nullable:true)
     }
 	
+	String toString() {
+		String dateStr = date.format("yyyy-MM-dd (EE)");
+		return "${dateStr} | ${plan}"
+	}
+	
 }
