@@ -95,12 +95,50 @@ log4j = {
            'net.sf.ehcache.hibernate'
 }
 
-// Added by the Spring Security Core plugin:
-grails.plugins.springsecurity.userLookup.userDomainClassName = 'de.rio.User'
-grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'de.rio.UserRole'
-grails.plugins.springsecurity.authority.className = 'de.rio.Role'
-
 // Migrate DB automatically at startup:
 grails.plugin.databasemigration.changelogLocation      =  "grails-app/migrations"
 grails.plugin.databasemigration.updateOnStartFileNames = ["changelog.groovy"]
 grails.plugin.databasemigration.updateOnStart          = true
+
+// Added by the Spring Scurity Core plugin:
+grails.plugins.springsecurity.userLookup.userDomainClassName = 'de.rio.User'
+grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'de.rio.UserRole'
+grails.plugins.springsecurity.authority.className = 'de.rio.Role'
+
+//grails.plugins.springsecurity.securityConfigType = "Annotation"   //default
+grails.plugins.springsecurity.securityConfigType = "InterceptUrlMap"
+
+grails.plugins.springsecurity.interceptUrlMap = [
+	'/user/**':         ['ROLE_ADMIN'],
+	'/role/**':         ['ROLE_ADMIN'],
+	'/userrole/**':     ['ROLE_ADMIN'],
+	'/*/create':        ['ROLE_USER'],
+	'/*/edit/**':       ['ROLE_USER'],
+	'/*/update/**':     ['ROLE_USER'],
+	'/**/delete/**':     ['ROLE_USER'],
+	'/*/save/**':       ['ROLE_USER'],
+	'/*/list/**':       ['ROLE_USER', 'ROLE_GUEST', 'IS_AUTHENTICATED_FULLY'],
+	'/*/show/**':       ['ROLE_USER', 'ROLE_GUEST', 'IS_AUTHENTICATED_FULLY'],
+	'/*/index/**':      ['ROLE_USER', 'ROLE_GUEST', 'IS_AUTHENTICATED_FULLY'],
+	'/js/**':           ['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/css/**':          ['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/images/**':       ['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/login/**':        ['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/logout/**':       ['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/':                ['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/**':              ['IS_AUTHENTICATED_ANONYMOUSLY']
+ ]
+
+grails.plugins.springsecurity.ipRestrictions = [
+	'/pattern1/**': '123.234.345.456',
+	'/pattern2/**': '10.0.0.0/8',
+	'/pattern3/**': ['10.10.200.42', '10.10.200.63']
+ ]
+
+
+
+
+
+
+
+
