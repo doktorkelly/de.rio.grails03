@@ -115,7 +115,7 @@ grails.plugins.springsecurity.interceptUrlMap = [
 	'/*/create':        ['ROLE_USER'],
 	'/*/edit/**':       ['ROLE_USER'],
 	'/*/update/**':     ['ROLE_USER'],
-	'/**/delete/**':     ['ROLE_USER'],
+	'/*/delete/**':     ['ROLE_USER'],
 	'/*/save/**':       ['ROLE_USER'],
 	'/*/list/**':       ['ROLE_USER', 'ROLE_GUEST', 'IS_AUTHENTICATED_FULLY'],
 	'/*/show/**':       ['ROLE_USER', 'ROLE_GUEST', 'IS_AUTHENTICATED_FULLY'],
