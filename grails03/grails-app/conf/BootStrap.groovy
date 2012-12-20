@@ -9,7 +9,7 @@ class BootStrap {
 		Role userRole = new Role(authority: 'ROLE_USER').save(flush: true);
 		Role guestRole = new Role(authority: 'ROLE_GUEST').save(flush: true);
 		
-		User adminUser = new User(username: 'admin', enabled: true, password: 'min80user');
+		User adminUser = new User(username: 'admin', enabled: true, password: 'min80user'); //appuser2
 		adminUser.save(flush: true);
 		User employeeUser = new User(username: 'employee', enabled: true, password: 'appuser12');
 		employeeUser.save(flush: true);

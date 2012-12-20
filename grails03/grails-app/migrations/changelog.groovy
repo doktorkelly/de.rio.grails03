@@ -269,4 +269,8 @@ databaseChangeLog = {
 	include file: 'change-v0.3.2.b.groovy'
 
 	include file: 'change-v0.3.2.c.groovy'
+
+	include file: 'change-v0.3.3.a.groovy'
+
+	include file: 'change-v0.3.3.b.groovy'
 }

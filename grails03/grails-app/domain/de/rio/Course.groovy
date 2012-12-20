@@ -7,6 +7,7 @@ class Course {
 	Date   startDate;
 	Date   endDate;
 	BigDecimal price;
+	BigDecimal units;
 	String scheduleText;
 
 	Room    room;
@@ -19,6 +20,7 @@ class Course {
 		group(nullable:true)
 		quartal(nullable:true)
 		price(nullable:true)
+		units(nullable:true)
 		room(nullable:true)
 		scheduleText(nullable:true)
 		teacher(nullable:true)
