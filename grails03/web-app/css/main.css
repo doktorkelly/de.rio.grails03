@@ -418,8 +418,15 @@ tr>td:last-child, tr>th:last-child {
 	padding-right: 1.25em;
 }
 
+td.extra,th.extra {
+	width: 2em;
+	padding-right: 0.0em;
+	padding-left: 0.0em;
+	background: #E1F2B6;
+}
+
 td, th {
-	line-height: 1.5em;
+	line-height: 1em;
 	padding: 0.5em 0.6em;
 	text-align: left;
 	vertical-align: top;

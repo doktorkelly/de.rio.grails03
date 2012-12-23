@@ -17,11 +17,6 @@ class ${className}Controller {
         [${propertyName}: new ${className}(params)]
     }
 
-    def copy() {
-        flash.message = "cannot copy ${className}"
-        redirect(action: "list")
-    }
-
     def save() {
         def ${propertyName} = new ${className}(params)
         if (!${propertyName}.save(flush: true)) {
