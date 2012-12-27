@@ -32,7 +32,6 @@ class Course {
 	
 	static mapping = {
 		group column: 'group_name'
-		sort "name"
 		registrations sort:'student', order: 'asc'
 		lessons       sort:'date', order: 'asc'
 	}
@@ -58,7 +57,7 @@ class Course {
 		return clone;
 	}
 	
-	static List<Course> listInDefaultSortOrder(GrailsParameterMap params) {
+	static List<Course> listInDefaultOrder(GrailsParameterMap params) {
 		def c = Course.createCriteria();
 		List<Course> results = c.list(max: params.max, offset: params.offset) {
 			order("name", "asc")

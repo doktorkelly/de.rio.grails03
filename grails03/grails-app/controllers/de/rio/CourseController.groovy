@@ -10,9 +10,11 @@ class CourseController {
 		params.max = Math.min(max ?: 20, 100)
 		List<Course> courseList = null;
 		if (! params.sort) {
-			courseList = Course.listInDefaultSortOrder(params);
+			courseList = Course.listInDefaultOrder(params);
 		}
-		courseList = Course.list(params);
+		else {
+			courseList = Course.list(params);
+		}
 		[courseInstanceList: courseList, courseInstanceTotal: Course.count()]
 	}
 	
