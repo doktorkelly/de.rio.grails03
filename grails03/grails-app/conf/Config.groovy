@@ -93,6 +93,10 @@ log4j = {
            'org.springframework',
            'org.hibernate',
            'net.sf.ehcache.hibernate'
+		   
+	debug  'grails.app.controllers.de.rio'                  // controller
+	
+	info   'grails.app.domain'
 }
 
 // Migrate DB automatically at startup:

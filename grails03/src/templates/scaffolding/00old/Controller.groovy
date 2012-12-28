@@ -17,6 +17,11 @@ class ${className}Controller {
         [${propertyName}: new ${className}(params)]
     }
 
+    def copy() {
+        flash.message = "cannot copy ${className}"
+        redirect(action: "list")
+    }
+
     def save() {
         def ${propertyName} = new ${className}(params)
         if (!${propertyName}.save(flush: true)) {
@@ -25,7 +30,8 @@ class ${className}Controller {
         }
 
         flash.message = message(code: 'default.created.message', args: [message(code: '${domainClass.propertyName}.label', default: '${className}'), ${propertyName}.id])
-        redirect(action: "show", id: ${propertyName}.id)
+        redirect(action: "list")
+        // redirect(action: "show", id: ${propertyName}.id)
     }
 
     def show(Long id) {
@@ -76,7 +82,8 @@ class ${className}Controller {
         }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: '${domainClass.propertyName}.label', default: '${className}'), ${propertyName}.id])
-        redirect(action: "show", id: ${propertyName}.id)
+        // redirect(action: "show", id: ${propertyName}.id)
+        redirect(action: "list")
     }
 
     def delete(Long id) {

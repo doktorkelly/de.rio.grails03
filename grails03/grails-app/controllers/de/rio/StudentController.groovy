@@ -6,5 +6,13 @@ import grails.plugins.springsecurity.Secured;
 class StudentController {
 	def scaffold = Student;
 	
-//    def index() { }
+	def list(Integer max) {
+		params.max = Math.min(max ?: 20, 100);
+		if (!params.sort) {
+			params.sort = 'lastName';
+		}
+		List<Student> students = Student.list(params);
+		[studentInstanceList: students,
+		studentInstanceTotal: Student.count()]
+	}
 }
