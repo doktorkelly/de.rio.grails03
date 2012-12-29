@@ -7,6 +7,11 @@ class Registration {
 	
 	static belongsTo = [course: Course, student: Student];
 	
+	static mapping = {
+		course sort: 'name', order: 'asc'
+		student sort: 'lastName', order: 'asc'
+	}
+	
     static constraints = {
 		course()
 		student()
