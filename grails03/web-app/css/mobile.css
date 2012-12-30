@@ -47,8 +47,8 @@
 	}
 
 	/* hide all but the first column of list tables */
-	.scaffold-list td:not(:first-child),
-	.scaffold-list th:not(:first-child) {
+	.scaffold-list td:not(:nth-child(3)),
+	.scaffold-list th:not(:nth-child(3)) {
 		display: none;
 	}
 

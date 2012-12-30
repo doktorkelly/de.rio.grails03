@@ -23,6 +23,8 @@
 			<table>
 				<thead>
 					<tr>
+						<th></th>
+						<th></th>
 					<%  excludedProps = Event.allEvents.toList() << 'id' << 'version'
 						allowedNames = domainClass.persistentProperties*.name << 'dateCreated' << 'lastUpdated'
 						props = domainClass.properties.findAll { allowedNames.contains(it.name) && !excludedProps.contains(it.name) && it.type != null && !Collection.isAssignableFrom(it.type) }
@@ -39,6 +41,8 @@
 				<tbody>
 				<g:each in="\${${propertyName}List}" status="i" var="${propertyName}">
 					<tr class="\${(i % 2) == 0 ? 'even' : 'odd'}">
+						<td class="extra"><g:link action="edit" id="\${${propertyName}.id}">edit</g:link></td>
+						<td class="extra"><g:link action="copy" id="\${${propertyName}.id}">copy</g:link></td>
 					<%  props.eachWithIndex { p, i ->
 							if (i == 0) { %>
 						<td><g:link action="show" id="\${${propertyName}.id}">\${fieldValue(bean: ${propertyName}, field: "${p.name}")}</g:link></td>
