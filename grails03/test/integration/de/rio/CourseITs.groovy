@@ -1,31 +1,21 @@
 package de.rio
 
-import grails.test.mixin.*
+import static org.junit.Assert.*
 import org.junit.*
 
+class CourseITs {
 
-/**
- * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
- */
-@TestFor(Course)
-class CourseTests {
+    @Before
+    void setUp() {
+        // Setup logic here
+    }
 
-	void testClone() {
-		//setup:
-		Course course1 = new Course(name: "test01");
-		Course course2 = course1.clone();
-		
-		//execute:
-		course2.save(flush: true);
-		
-		//verify:
-		log.info(""
-			+ "\ncourse1: " + course1
-			+ "\ncourse2: " + course2);
-		assertNotSame(course1, course2);
-		assertEquals(course1.name, course2.name);
-	}
+    @After
+    void tearDown() {
+        // Tear down logic here
+    }
 	
+	@Test
 	void testListInDefaultOrder() {
 		//setup:
 		Course course2 = new Course(name: "test02").save(flush: true);

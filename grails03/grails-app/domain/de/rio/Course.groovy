@@ -1,6 +1,6 @@
 package de.rio
 
-import org.codehaus.groovy.grails.web.servlet.mvc.GrailsParameterMap;
+// import org.codehaus.groovy.grails.web.servlet.mvc.GrailsParameterMap;
 
 class Course {
 	String name;
@@ -57,7 +57,7 @@ class Course {
 		return clone;
 	}
 	
-	static List<Course> listInDefaultOrder(GrailsParameterMap params) {
+	static List<Course> listInDefaultOrder(Map params) {
 		def c = Course.createCriteria();
 		List<Course> results = c.list(max: params.max, offset: params.offset) {
 			order("name", "asc")

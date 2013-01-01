@@ -1,5 +1,7 @@
 package de.rio
 
+import java.util.List;
+
 class Registration {
 	Date dateCreated;
 	Boolean paid;
@@ -22,6 +24,20 @@ class Registration {
 	
 	BigDecimal getRealPrice() {
 		return (specialPrice ? specialPrice : course.price);
+	}
+	
+	/**
+	 * TODO: order by course.name + student.lastName
+	 * @param params
+	 * @return
+	 */
+	static List<Registration> listInDefaultOrder(Map params) {
+		def c = Registration.createCriteria();
+		List<Registration> results = c.list(max: params.max, offset: params.offset) {
+			order("course", "asc")
+			order("student", "asc")
+		}
+		return results;
 	}
 	
 	String toString() {
