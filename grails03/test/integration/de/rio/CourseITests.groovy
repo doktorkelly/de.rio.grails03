@@ -3,7 +3,7 @@ package de.rio
 import static org.junit.Assert.*
 import org.junit.*
 
-class CourseITs {
+class CourseITests {
 
     @Before
     void setUp() {

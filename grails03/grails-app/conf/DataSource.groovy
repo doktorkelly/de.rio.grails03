@@ -30,7 +30,7 @@ environments {
     test {
         dataSource {
             url = "jdbc:postgresql://localhost:5432/grails03_test"
-//            dbCreate = "update"
+            dbCreate = "create"
 //            url = "jdbc:h2:mem:testDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
         }
     }

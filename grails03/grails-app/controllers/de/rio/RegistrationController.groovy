@@ -14,4 +14,12 @@ class RegistrationController {
 		registrationInstanceTotal: Registration.count()]
 	}
 	
+	def listByFilter(Integer max) {
+		params.max = Math.min(max ?: 20, 100);
+		List<Registration> registrations =
+			Registration.listByPropertyFilter(params);
+			[registrationInstanceList: registrations,
+				registrationInstanceTotal: Registration.count()]
+	}
+	
 }

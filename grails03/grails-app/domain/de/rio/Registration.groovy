@@ -40,6 +40,40 @@ class Registration {
 		return results;
 	}
 	
+	/**
+	 * return all registration that match params
+	 * params is a field,value map, filtering registration properties
+	 * @param params
+	 * @return
+	 */
+	static List<Registration> listByPropertyFilter(Map params) {
+		List<String> regProps = Registration.metaClass.properties*.name;
+		def c = Registration.createCriteria();
+		List<Registration> registrations = c.list(max: params.max, offset: params.offset) {
+			and {
+				course {
+					ilike('name', params.courseName);
+				}
+				student {
+					and {
+						ilike('lastName', params.studentLastName);
+						ilike('firstName', params.studentFirstName);
+					}
+				}
+			}
+		}
+//		List<Registration> registrations = c.list(max: params.max, offset: params.offset) {
+//			and {
+//				params.each { field, value ->
+//					if (regProps.grep(field) && value) {
+//						ilike(field, value);
+//					}
+//				}
+//			}
+//		}
+		return registrations;
+	}
+	
 	String toString() {
 		return "${course.name} | ${student.lastName}, ${student.firstName} | ${getRealPrice()}";
 	}

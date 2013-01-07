@@ -81,6 +81,10 @@ log4j = {
     //appenders {
     //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
     //}
+	//check:
+	root {
+		info 'file', 'stdout'
+	}
 
     error  'org.codehaus.groovy.grails.web.servlet',        // controllers
            'org.codehaus.groovy.grails.web.pages',          // GSP
@@ -96,7 +100,7 @@ log4j = {
 		   
 	debug  'grails.app.controllers.de.rio'                  // controller
 	
-	info   'grails.app.domain'
+	info   'grails.app.domain'                              // domain
 }
 
 // Migrate DB automatically at startup:
