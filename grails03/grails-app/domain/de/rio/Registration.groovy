@@ -43,6 +43,11 @@ class Registration {
 	/**
 	 * return all registration that match params
 	 * params is a field,value map, filtering registration properties
+	 * params keys:
+	 * courseName,
+	 * studentLastName,
+	 * studentFirstName,
+	 * paid
 	 * @param params
 	 * @return
 	 */
@@ -51,26 +56,33 @@ class Registration {
 		def c = Registration.createCriteria();
 		List<Registration> registrations = c.list(max: params.max, offset: params.offset) {
 			and {
-				course {
-					ilike('name', params.courseName);
+				if (params.courseName != null) {
+					course {
+						ilike('name', params.courseName);
+					}
 				}
-				student {
-					and {
+				if (params.studentLastName != null) {
+					student {
 						ilike('lastName', params.studentLastName);
+					}
+				}
+				if (params.studentFirstName != null) {
+					student {
 						ilike('firstName', params.studentFirstName);
 					}
 				}
+				if (params.paid != null) {
+					eq('paid', params.paid);
+				}
+			}
+			course {
+				order('name', 'asc')
+			}
+			student {
+				order('lastName', 'asc')
+				order('firstName', 'asc')
 			}
 		}
-//		List<Registration> registrations = c.list(max: params.max, offset: params.offset) {
-//			and {
-//				params.each { field, value ->
-//					if (regProps.grep(field) && value) {
-//						ilike(field, value);
-//					}
-//				}
-//			}
-//		}
 		return registrations;
 	}
 	
