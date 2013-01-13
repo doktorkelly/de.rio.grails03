@@ -1,6 +1,9 @@
 package de.rio
 
+import grails.orm.PagedResultList;
+
 import java.util.List;
+import java.util.Map;
 
 import org.codehaus.groovy.grails.web.servlet.mvc.GrailsParameterMap;
 
@@ -50,6 +53,24 @@ class Lesson {
 			order("date", "asc")
 		}
 		return results;
+	}
+	
+	static PagedResultList listByPropertyFilter(Map params) {
+		def c = Lesson.createCriteria();
+		PagedResultList lessons = c.list(max: params.max, offset: params.offset) {
+			and {
+				if (params.courseId && params.courseId != 'null') {
+					course {
+						eq('id', params.courseId.toLong());
+					}
+				}
+			}
+			course {
+				order('name', 'asc')
+			}
+			order('date', 'asc')
+		}
+		return lessons;
 	}
 	
 }

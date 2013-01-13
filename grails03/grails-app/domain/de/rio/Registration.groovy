@@ -28,10 +28,24 @@ class Registration {
 		return (specialPrice ? specialPrice : course.price);
 	}
 	
+	static BigDecimal getTotalPrice(List<Registration> registrationList) {
+		BigDecimal total = 0;
+		total = registrationList*.getRealPrice().sum();
+		return total;
+	}
+	
+	static BigDecimal getTotalPaid(List<Registration> registrationList) {
+		BigDecimal total = 0;
+		registrationList = registrationList.findAll{ x -> x.paid };
+		total = registrationList*.getRealPrice().sum();
+		return total;
+	}
+	
 	/**
 	 * TODO: order by course.name + student.lastName
 	 * @param params
 	 * @return
+	 * @deprecated use listByPropertyFiler()
 	 */
 	static List<Registration> listInDefaultOrder(Map params) {
 		def c = Registration.createCriteria();
@@ -67,8 +81,8 @@ class Registration {
 						eq('id', params.studentId.toLong());
 					}
 				}
-				if (params.paid) {
-					eq('paid', params.paid);
+				if (params.hasPaid && params.hasPaid != 'null') {
+					eq('paid', params.hasPaid.toBoolean());
 				}
 			}
 			course {

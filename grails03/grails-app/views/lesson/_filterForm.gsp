@@ -1,4 +1,4 @@
-<%@ page import="de.rio.Registration" %>
+<%@ page import="de.rio.Lesson" %>
 
 
 <g:form action="listByFilter" >
@@ -10,17 +10,6 @@
 				value="${params.courseId}"
 				noSelection="${['null':'all']}" 
 				required="" class="many-to-one"/>
-			student
-			<g:select id="student" name="studentId" from="${de.rio.Student.list()}" 
-				optionKey="id"  
-				value="${params.studentId}"
-				noSelection="${['null':'all']}" 
-				/>
-				paid
-				<g:select id="paid" name="hasPaid" from="${[true, false]}"
-				value="${params.hasPaid}"
-				noSelection="${['null':'all']}"
-				/>
 			<g:submitButton name="filter" value="filter" />
 		</div>
 	</fieldset>

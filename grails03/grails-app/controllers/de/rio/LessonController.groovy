@@ -1,5 +1,6 @@
 package de.rio
 
+import grails.orm.PagedResultList
 import grails.plugins.springsecurity.Secured;
 
 @Secured(['ROLE_USER'])
@@ -36,6 +37,18 @@ class LessonController {
 			lessonList = Lesson.list(params);
 		}
 		[lessonInstanceList: lessonList, lessonInstanceTotal: Lesson.count()]
+	}
+	
+	def listByFilter(Integer max) {
+		params.max = Math.min(max ?: 20, 100);
+		PagedResultList lessons = Lesson.listByPropertyFilter(params);
+		Integer lessonsTotal = lessons.getTotalCount();
+		render(
+			view: "list",
+			model: [
+				params: params,
+				lessonInstanceList: lessons,
+				lessonInstanceTotal: lessonsTotal] );
 	}
 	
 }

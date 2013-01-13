@@ -19,10 +19,14 @@ class RegistrationController {
 		params.max = Math.min(max ?: 20, 100);
 		PagedResultList registrations = Registration.listByPropertyFilter(params);
 		Integer registrationsTotal = registrations.getTotalCount();
+		Integer priceTotal = Registration.getTotalPrice(registrations);
+		Integer pricePaid = Registration.getTotalPaid(registrations);
 		render(
 			view: "list", 
 			model: [
 				params: params,
+				priceTotal: priceTotal,
+				pricePaid: pricePaid,
 				registrationInstanceList: registrations,
 				registrationInstanceTotal: registrationsTotal] );
 	}
