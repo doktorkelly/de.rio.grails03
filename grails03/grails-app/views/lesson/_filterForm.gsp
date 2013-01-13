@@ -5,7 +5,7 @@
 	<fieldset>		
 		<div>
 			course
-			<g:select id="course" name="courseId" from="${de.rio.Course.list()}"  
+			<g:select id="course" name="courseId" from="${de.rio.Course.listInDefaultOrder(params)}"  
 				optionKey="id" optionValue="${{it.toString(3)}}" 
 				value="${params.courseId}"
 				noSelection="${['null':'all']}" 

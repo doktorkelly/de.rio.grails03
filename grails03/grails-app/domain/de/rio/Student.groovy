@@ -1,5 +1,8 @@
 package de.rio
 
+import java.util.List;
+import java.util.Map;
+
 import org.grails.datastore.gorm.finders.MethodExpression.InList;
 
 class Student {
@@ -31,7 +34,17 @@ class Student {
 		dateOfBirth(nullable:true)
     }
 	
+	@Override
 	String toString() {
 		return "${lastName}, ${firstName}";
+	}
+	
+	static List<Student> listInDefaultOrder(Map params) {
+		def c = Student.createCriteria();
+		List<Student> results = c.list(max: params.max, offset: params.offset) {
+			order("lastName", "asc")
+			order("firstName", "asc")
+		}
+		return results;
 	}
 }
