@@ -1,5 +1,6 @@
 package de.rio
 
+import grails.orm.PagedResultList;
 import grails.plugins.springsecurity.Secured;
 
 @Secured(['ROLE_USER'])
@@ -16,10 +17,14 @@ class RegistrationController {
 	
 	def listByFilter(Integer max) {
 		params.max = Math.min(max ?: 20, 100);
-		List<Registration> registrations =
-			Registration.listByPropertyFilter(params);
-			[registrationInstanceList: registrations,
-				registrationInstanceTotal: Registration.count()]
+		PagedResultList registrations = Registration.listByPropertyFilter(params);
+		Integer registrationsTotal = registrations.getTotalCount();
+		render(
+			view: "list", 
+			model: [
+				params: params,
+				registrationInstanceList: registrations,
+				registrationInstanceTotal: registrationsTotal] );
 	}
 	
 }

@@ -38,7 +38,17 @@ class Course {
 	
 	@Override
 	String toString() {
-		return "${name} | ${group} | ${quartal} | ${scheduleText}";
+		return toString(4);
+	}
+	
+	String toString(int numFields) {
+		switch(numFields) {
+			case 1: return "${name}";
+			case 2: return "${name} | ${group}";
+			case 3: return "${name} | ${group} | ${quartal}";
+			case 4: return "${name} | ${group} | ${quartal} | ${scheduleText}";
+			default: return "${name} | ${group} | ${quartal} | ${scheduleText}";
+		}
 	}
 	
 	@Override

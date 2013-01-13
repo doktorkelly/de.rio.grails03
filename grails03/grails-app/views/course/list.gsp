@@ -48,7 +48,10 @@
 						<td class="extra"><g:link action="edit" id="${courseInstance.id}">edit</g:link></td>
 						<td class="extra"><g:link action="copy" id="${courseInstance.id}">copy</g:link></td>
 					
-						<td><g:link action="show" id="${courseInstance.id}">${fieldValue(bean: courseInstance, field: "name")}</g:link></td>
+						<td><g:link action="show" id="${courseInstance.id}">
+							${fieldValue(bean: courseInstance, field: "name")} 
+							(${courseInstance.registrations.size()})
+						</g:link></td>
 					
 						<td>${fieldValue(bean: courseInstance, field: "group")}</td>
 					

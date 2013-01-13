@@ -1,5 +1,7 @@
 package de.rio
 
+import grails.orm.PagedResultList;
+
 import java.util.List;
 
 class Registration {
@@ -44,34 +46,28 @@ class Registration {
 	 * return all registration that match params
 	 * params is a field,value map, filtering registration properties
 	 * params keys:
-	 * courseName,
-	 * studentLastName,
-	 * studentFirstName,
+	 * courseId,
+	 * studentId
 	 * paid
 	 * @param params
 	 * @return
 	 */
-	static List<Registration> listByPropertyFilter(Map params) {
+	static PagedResultList listByPropertyFilter(Map params) {
 		List<String> regProps = Registration.metaClass.properties*.name;
 		def c = Registration.createCriteria();
-		List<Registration> registrations = c.list(max: params.max, offset: params.offset) {
+		PagedResultList registrations = c.list(max: params.max, offset: params.offset) {
 			and {
-				if (params.courseName != null) {
+				if (params.courseId && params.courseId != 'null') {
 					course {
-						ilike('name', params.courseName);
+						eq('id', params.courseId.toLong());
 					}
 				}
-				if (params.studentLastName != null) {
+				if (params.studentId && params.studentId != 'null') {
 					student {
-						ilike('lastName', params.studentLastName);
+						eq('id', params.studentId.toLong());
 					}
 				}
-				if (params.studentFirstName != null) {
-					student {
-						ilike('firstName', params.studentFirstName);
-					}
-				}
-				if (params.paid != null) {
+				if (params.paid) {
 					eq('paid', params.paid);
 				}
 			}
@@ -86,7 +82,24 @@ class Registration {
 		return registrations;
 	}
 	
+	@Override
 	String toString() {
-		return "${course.name} | ${student.lastName}, ${student.firstName} | ${getRealPrice()}";
+		return toString(4);
+	}
+	
+	String toString(int numFields) {
+		switch(numFields) {
+			case 1: return "${course.name}";
+			case 2: return "${course.name} | ${student.lastName}";
+			case 3: return "${course.name} | ${student.lastName}, ${student.firstName}";
+			case 4: return "${course.name} | ${student.lastName}, ${student.firstName} | ${getRealPrice()}";
+			default: return "${course.name} | ${student.lastName}, ${student.firstName} | ${getRealPrice()}";
+		}
 	}
 }
+
+
+
+
+
+
