@@ -19,8 +19,8 @@
 		<div id="list-registration" class="content scaffold-list" role="main">
 			<h1><g:message code="default.list.label" args="[entityName]" /> 
 				[students: ${registrationInstanceTotal}]
-				[debit: ${priceTotal}]
-				[paid:  ${pricePaid}]
+				[credit:   ${priceTotal}]
+				[paid:     ${pricePaid}]
 			</h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>

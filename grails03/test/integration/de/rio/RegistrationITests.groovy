@@ -80,22 +80,35 @@ class RegistrationITests {
 		assertEquals([r01,r02], resultList);
 	}
 	
-
-	
 	@Test
-	void testToString() {
-		//setup
-		Registration reg = new Registration(
-			course: new Course(name: "c01", price: 200),
-			student: new Student(lastName: "s01", firstName: "f01"),
-			paid: false);
-		//execute
-		String result = reg.toString();
-		//verify
+	void testListInDefaultOrder() {
+		//setup:
+		Registration registration2 = new Registration(
+			course: new Course(name: "c2"),
+			student: new Student(lastName: "last02", firstName: "first02"))
+			.save(flush: true);
+		Registration registration1 = new Registration(
+			course: new Course(name: "c1"),
+			student: new Student(lastName: "last01", firstName: "first01"))
+			.save(flush: true)
+		Map params = [max: 10, offset: 0];
+		
+		//execute:
+		List<Registration> registrationList = Registration.listInDefaultOrder(params);
+		
+		//verify:
+		Registration registrationExp1 = Registration.where {
+			course.name == "c1" }
+			.find();
+		Registration registrationExp2 = Registration.find { course.name == "c2" };
+		List<Registration> registrationsExp = [registrationExp1, registrationExp2];
 		log.info(""
-			+ "\nresult: " + result);
-		assertEquals("c01 | s01, f01 | 200", result);
+			+ "\nregistrationList:  " + registrationList
+			+ "\nregistrationsExp:  " + registrationsExp );
+		assertEquals(registrationList.size(), 2);
+		assertEquals(registrationList, registrationsExp);
 	}
+	
 }
 
 

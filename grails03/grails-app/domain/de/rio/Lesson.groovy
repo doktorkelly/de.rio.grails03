@@ -1,5 +1,6 @@
 package de.rio
 
+import grails.orm.HibernateCriteriaBuilder
 import grails.orm.PagedResultList;
 
 import java.util.List;
@@ -56,7 +57,10 @@ class Lesson {
 	}
 	
 	static PagedResultList listByPropertyFilter(Map params) {
-		def c = Lesson.createCriteria();
+		if (params == null) {
+			params = new HashMap();
+		}
+		HibernateCriteriaBuilder c = Lesson.createCriteria();
 		PagedResultList lessons = c.list(max: params.max, offset: params.offset) {
 			and {
 				if (params.courseId && params.courseId != 'null') {
@@ -65,10 +69,21 @@ class Lesson {
 					}
 				}
 			}
-			course {
-				order('name', 'asc')
+			if (params.sort) {
+				order(params.sort, 'asc')
 			}
-			order('date', 'asc')
+			else {
+				course {
+					order('name', 'asc')
+				}
+				order('date', 'asc')
+			}
+//			if (params.max) {
+//				maxResults(params.max)
+//			}
+//			if (params.offset) {
+//				firstResult(params.offset)
+//			} 
 		}
 		return lessons;
 	}

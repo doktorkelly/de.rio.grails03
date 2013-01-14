@@ -25,19 +25,40 @@ class Registration {
     }
 	
 	BigDecimal getRealPrice() {
-		return (specialPrice ? specialPrice : course.price);
+		BigDecimal realPrice = 0;
+		if (specialPrice) {
+			realPrice = specialPrice;
+		}
+		else if (course?.price) {
+			realPrice = course.price;
+		} 		
+		if (realPrice == null) {
+			realPrice = 0;
+		}
+		return realPrice;
 	}
 	
 	static BigDecimal getTotalPrice(List<Registration> registrationList) {
-		BigDecimal total = 0;
-		total = registrationList*.getRealPrice().sum();
+		if (registrationList == null || registrationList.size() == 0) {
+			return 0;
+		}
+		BigDecimal total = registrationList*.getRealPrice().sum();
+		if (total == null) {
+			total = 0;
+		}
 		return total;
 	}
 	
 	static BigDecimal getTotalPaid(List<Registration> registrationList) {
+		if (registrationList == null || registrationList.size() == 0) {
+			return 0;
+		}
 		BigDecimal total = 0;
 		registrationList = registrationList.findAll{ x -> x.paid };
 		total = registrationList*.getRealPrice().sum();
+		if (total == null) {
+			total = 0;
+		}
 		return total;
 	}
 	
@@ -67,7 +88,6 @@ class Registration {
 	 * @return
 	 */
 	static PagedResultList listByPropertyFilter(Map params) {
-		List<String> regProps = Registration.metaClass.properties*.name;
 		def c = Registration.createCriteria();
 		PagedResultList registrations = c.list(max: params.max, offset: params.offset) {
 			and {

@@ -23,7 +23,7 @@ class LessonController {
 			flash.message = message(
 				code: 'default.not.created.message',
 				args: [message(code: 'lesson.label', default: 'Lesson'), lesson2.id]);
-			redirect(action: "list");
+			redirect(action: "listByFilter");
 		}
 	}
 	
@@ -36,7 +36,8 @@ class LessonController {
 		else {
 			lessonList = Lesson.list(params);
 		}
-		[lessonInstanceList: lessonList, lessonInstanceTotal: Lesson.count()]
+		[lessonInstanceList: lessonList, 
+		lessonInstanceTotal: Lesson.count()]
 	}
 	
 	def listByFilter(Integer max) {
