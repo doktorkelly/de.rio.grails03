@@ -8,7 +8,7 @@ public class LessonFilterTest {
 
 	@Test
 	public void testContructor() {
-		fail("Not yet implemented");
+		
 	}
 
 }
