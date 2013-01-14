@@ -25,17 +25,15 @@ class Registration {
     }
 	
 	BigDecimal getRealPrice() {
-		BigDecimal realPrice = 0;
 		if (specialPrice) {
-			realPrice = specialPrice;
+			return specialPrice;
 		}
 		else if (course?.price) {
-			realPrice = course.price;
-		} 		
-		if (realPrice == null) {
-			realPrice = 0;
+			return course.price;
 		}
-		return realPrice;
+		else {
+			return 0;
+		} 		
 	}
 	
 	static BigDecimal getTotalPrice(List<Registration> registrationList) {

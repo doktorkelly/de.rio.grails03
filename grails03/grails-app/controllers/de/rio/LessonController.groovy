@@ -11,15 +11,9 @@ class LessonController {
 		Lesson lesson1 = Lesson.get(id);
 		Lesson lesson2 = lesson1.clone();
 		if (lesson2.validate() && lesson2.save(flush: true)) {
-			redirect(action: "list");
+			redirect(action: "listByFilter");
 		}
 		else {
-			log.info(""
-				+ "\nlesson1.id:  " + lesson1.id
-				+ "\nlesson2.id:  " + lesson2.id
-				+ "\nlesson1:     " + lesson1
-				+ "\nlesson2:     " + lesson2
-				);
 			flash.message = message(
 				code: 'default.not.created.message',
 				args: [message(code: 'lesson.label', default: 'Lesson'), lesson2.id]);
@@ -41,9 +35,26 @@ class LessonController {
 	}
 	
 	def listByFilter(Integer max) {
+		if (LessonFilter.hasFilter(params)) {
+			LessonFilter lessonFilter = new LessonFilter(params);
+			session['lessonFilter'] = lessonFilter;
+		}
+		else {
+			LessonFilter lessonFilter = (LessonFilter)session['lessonFilter'];
+			if(params && lessonFilter) {
+				Map<String,Object> filterParams = lessonFilter.toParams();
+				if (filterParams) {
+					params.putAll(filterParams);
+				}
+			}
+		}
 		params.max = Math.min(max ?: 20, 100);
 		PagedResultList lessons = Lesson.listByPropertyFilter(params);
 		Integer lessonsTotal = lessons.getTotalCount();
+		
+		log.info(""
+			+ "\nsession:\n    " + session
+			+ "\nparams:       " + params );
 		render(
 			view: "list",
 			model: [
@@ -53,3 +64,11 @@ class LessonController {
 	}
 	
 }
+
+
+
+
+
+
+
+

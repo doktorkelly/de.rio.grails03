@@ -28,9 +28,11 @@ class Lesson {
 		homework(nullable:true)
     }
 	
+	static String DATEFORMAT = "yyyy-MM-dd (EE)";
+	
 	@Override
 	String toString() {
-		String dateStr = date.format("yyyy-MM-dd (EE)");
+		String dateStr = date.format(DATEFORMAT);
 		return "${dateStr} | ${plan}"
 	}
 
@@ -78,12 +80,6 @@ class Lesson {
 				}
 				order('date', 'asc')
 			}
-//			if (params.max) {
-//				maxResults(params.max)
-//			}
-//			if (params.offset) {
-//				firstResult(params.offset)
-//			} 
 		}
 		return lessons;
 	}
