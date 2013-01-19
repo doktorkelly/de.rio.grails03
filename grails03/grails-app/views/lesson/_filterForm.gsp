@@ -2,7 +2,7 @@
 
 
 <g:form action="listByFilter" >
-	<fieldset>		
+	<fieldset class="filtercontain">		
 		<div>
 			course
 			<g:select id="course" name="courseId" from="${de.rio.Course.listInDefaultOrder(params)}"  

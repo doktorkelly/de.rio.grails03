@@ -51,10 +51,6 @@ class LessonController {
 		params.max = Math.min(max ?: 20, 100);
 		PagedResultList lessons = Lesson.listByPropertyFilter(params);
 		Integer lessonsTotal = lessons.getTotalCount();
-		
-		log.info(""
-			+ "\nsession:\n    " + session
-			+ "\nparams:       " + params );
 		render(
 			view: "list",
 			model: [

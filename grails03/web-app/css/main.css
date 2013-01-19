@@ -205,20 +205,31 @@ img {
 
 /* CREATE/EDIT FORMS AND SHOW PAGES */
 
-fieldset .filtercontain {
-	background-color: blue;
-	margin: 0.0em 0.0em 0.0em 0.0em;
+fieldset, .filtercontain {
+	margin: 0.0em 0.0em 0.0em 1.0em;
 	padding: 0.0em 0.0em 0.0em 0.0em;
+	border: none;
+	position: relative;
+	zoom: 1;
 }
 
-fieldset,
-.property-list {
+fieldset, .property-list {
+	margin: 0.0em 0em 0 0em;
+	padding: 0.0em 0em 0.0em;
+	position: relative;
+	zoom: 1;
+	border: none;
+}
+
+/*
+fieldset, .property-list {
 	margin: 0.6em 1.25em 0 1.25em;
 	padding: 0.3em 1.8em 1.25em;
 	position: relative;
 	zoom: 1;
 	border: none;
 }
+*/
 
 .property-list .fieldcontain {
 	list-style: none;
