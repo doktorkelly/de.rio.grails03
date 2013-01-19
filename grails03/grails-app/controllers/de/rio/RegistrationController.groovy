@@ -30,5 +30,14 @@ class RegistrationController {
 				registrationInstanceList: registrations,
 				registrationInstanceTotal: registrationsTotal] );
 	}
+		
+	def print(Integer max) {
+		//TODO: user filter
+		params.max = Math.min(max ?: 20, 100)
+		List<Registration> registrations =
+			Registration.list(sort: "course.name", max: params.max, offset: params.offset);
+		[registrationInstanceList: registrations,
+		registrationInstanceTotal: Registration.count()]
+	}
 	
 }

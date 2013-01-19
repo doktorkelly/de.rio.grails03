@@ -1,5 +1,7 @@
 package de.rio
 
+import javax.servlet.http.HttpSession;
+
 import grails.orm.PagedResultList
 import grails.plugins.springsecurity.Secured;
 
@@ -35,18 +37,22 @@ class LessonController {
 	}
 	
 	def listByFilter(Integer max) {
-		if (LessonFilter.hasFilter(params)) {
-			LessonFilter lessonFilter = new LessonFilter(params);
-			session['lessonFilter'] = lessonFilter;
-		}
-		else {
-			LessonFilter lessonFilter = (LessonFilter)session['lessonFilter'];
-			if(params && lessonFilter) {
-				Map<String,Object> filterParams = lessonFilter.toParams();
-				if (filterParams) {
-					params.putAll(filterParams);
-				}
-			}
+//		if (LessonFilter.hasFilter(params)) {
+//			LessonFilter lessonFilter = new LessonFilter(params);
+//			session['lessonFilter'] = lessonFilter;
+//		}
+//		else {
+//			LessonFilter lessonFilter = (LessonFilter)session['lessonFilter'];
+//			if(params && lessonFilter) {
+//				Map<String,Object> filterParams = lessonFilter.toParams();
+//				if (filterParams) {
+//					params.putAll(filterParams);
+//				}
+//			}
+//		}
+		Map filterParams = getFilterParams(params, session);
+		if (filterParams) {
+			params.putAll(filterParams);
 		}
 		params.max = Math.min(max ?: 20, 100);
 		PagedResultList lessons = Lesson.listByPropertyFilter(params);
@@ -57,6 +63,21 @@ class LessonController {
 				params: params,
 				lessonInstanceList: lessons,
 				lessonInstanceTotal: lessonsTotal] );
+	}
+	
+	private Map getFilterParams(Map params, HttpSession session) {
+		Map<String,Object> resultParams = null;
+		if (LessonFilter.hasFilter(params)) {
+			LessonFilter lessonFilter = new LessonFilter(params);
+			session['lessonFilter'] = lessonFilter;
+		}
+		else {
+			LessonFilter lessonFilter = (LessonFilter)session['lessonFilter'];
+			if(lessonFilter) {
+				resultParams = lessonFilter.toParams();
+			}
+		}
+		return resultParams;
 	}
 	
 }
